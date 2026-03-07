@@ -1,28 +1,28 @@
 class Localgo < Formula
   desc "LocalSend v2.1 protocol implementation in Go — send and receive files over LAN"
   homepage "https://github.com/bethropolis/localgo"
-  version "0.3.5"
+  version "0.3.5.4"
   license "MIT"
 
   on_macos do
     on_arm do
       url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo-macos-arm64"
-      sha256 "89915f9f17a1dd26d63b412bc692fe39a3360295802c11ab0be3663215fae9bf"
+      sha256 "8fdf88c2c3864fa1153ad80083dfbf50c00206f983aa5c63d5bd635aa4527c91"
     end
     on_intel do
       url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo-macos-amd64"
-      sha256 "ddeae48a5b9eca5604e3d8b3c6c84ef57a9b0dac42a6acdfbcbf3c51ec9abb44"
+      sha256 "864faaa0ed95873d65300229c5fc2e1547295727ee33c9888387a2976485587f"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo-linux-arm64"
-      sha256 "e063094a3d897a5fc9a6feef77d485454f1091d10a5707683b647c8fddd895b4"
+      sha256 "211a5fac76d2bdba4e89394709f9be383a0bb490b7ab07cf702ae320182c63ca"
     end
     on_intel do
       url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo-linux-amd64"
-      sha256 "f4545d00a4fa0a278399cbe8061c35c95eb3216779f8ed2a04ea3c44aad866cc"
+      sha256 "3d7439013c1c960a2b2636a41e57312ea057cb3aef7e4c1389bfd06cf84f7f8d"
     end
   end
 
