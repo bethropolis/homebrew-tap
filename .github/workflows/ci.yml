@@ -32,7 +32,7 @@ jobs:
       - name: Run brew audit
         run: |
           brew tap bethropolis/tap
-          brew audit --strict --online Formula/*.rb
+          brew audit --strict --online bethropolis/tap/localgo
 
       - name: Run brew style
-        run: brew style --formula Formula/*.rb
+        run: brew style --formula bethropolis/tap/localgo
