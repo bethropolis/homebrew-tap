@@ -35,4 +35,5 @@ jobs:
           brew audit --strict --online bethropolis/tap/localgo
 
       - name: Run brew style
-        run: brew style --formula bethropolis/tap/localgo
+        # --cask not --formula — localgo is distributed as a Cask (pre-built binary)
+        run: brew style --cask bethropolis/tap/localgo
