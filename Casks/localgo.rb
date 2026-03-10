@@ -3,7 +3,7 @@ cask "localgo" do
   name "localgo"
   desc "LocalSend v2.1 protocol implementation — LAN file transfer CLI"
   homepage "https://github.com/bethropolis/localgo"
-  version "0.3.7"
+  version "0.3.8"
 
   livecheck do
     skip "Auto-generated on release."
@@ -16,27 +16,23 @@ cask "localgo" do
 
   on_macos do
     on_intel do
-      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_darwin_amd64.tar.gz",
-        verified: "github.com/bethropolis/localgo"
-      sha256 "59fa5702dc5c279898d5cbb74a0dcbd38a1ac6abc1824ed044efad792f3254e7"
+      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_darwin_amd64.tar.gz"
+      sha256 "a2a46e7046a2392d5e59eaad8ad28411fdf7d8f78fc52678c56297eaab27bbbb"
     end
     on_arm do
-      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_darwin_arm64.tar.gz",
-        verified: "github.com/bethropolis/localgo"
-      sha256 "5db7761c24a7279855a9a9aa071a78ab59aafb10bd9dd8c512ba5a9979a4986d"
+      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_darwin_arm64.tar.gz"
+      sha256 "fe9096ff74171558e5439f073e649c059037003bdc8fc3fb2ebd8962447b01ea"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_linux_amd64.tar.gz",
-        verified: "github.com/bethropolis/localgo"
-      sha256 "9d1a7893308f2cbf0b182ad6dd1c3af785ac33f0badeb7734ffb80f094819427"
+      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_linux_amd64.tar.gz"
+      sha256 "367c49a4a825eb3f26399432162d3ba79656aa4dd37a45b97bca806655bad3c5"
     end
     on_arm do
-      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_linux_arm64.tar.gz",
-        verified: "github.com/bethropolis/localgo"
-      sha256 "928606885e2578231f249df8d475d42ea5ac4e8a4bd2d132f9203bb4634f5aa1"
+      url "https://github.com/bethropolis/localgo/releases/download/v#{version}/localgo_#{version}_linux_arm64.tar.gz"
+      sha256 "fd7c441b623dd151b649e95ea670aebb0765d6573959c67d4ef7fa0d03094f15"
     end
   end
 
@@ -48,12 +44,10 @@ cask "localgo" do
   end
 
   caveats do
-    "To start localgo as a background service:"
-    "  localgo serve --quiet --auto-accept"
+    "Shell completions are installed automatically."
     ""
-    "To enable shell completions, restart your shell or run:"
-    "  source ~/.bash_profile  # bash"
-    "  source ~/.zshrc         # zsh"
+    "To start as a background service:"
+    "  localgo serve --quiet --auto-accept"
   end
 
   # No zap stanza required
