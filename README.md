@@ -23,9 +23,11 @@ brew install bethropolis/tap/localgo
 
 ## Available formulae
 
+<!-- FORMULA_TABLE_START -->
 | Formula | Description |
 | ------- | ----------- |
-| `localgo` | LocalSend v2.1 protocol implementation in Go — send and receive files over LAN |
+| `hello` | A greeting formula example |
+<!-- FORMULA_TABLE_END -->
 
 ## License
 
