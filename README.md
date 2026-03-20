@@ -29,6 +29,14 @@ brew install bethropolis/tap/localgo
 | `hello` | A greeting formula example |
 <!-- FORMULA_TABLE_END -->
 
+## Available casks
+
+<!-- CASK_TABLE_START -->
+| Cask | Description |
+| ---- | ----------- |
+| `localgo` | LocalSend v2.1 protocol implementation — LAN file transfer CLI |
+<!-- CASK_TABLE_END -->
+
 ## License
 
 [MIT](LICENSE)

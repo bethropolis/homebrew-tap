@@ -6,9 +6,12 @@ require "pathname"
 root = Pathname.new(__dir__).parent
 readme_path = root.join("README.md")
 formula_dir = root.join("Formula")
+cask_dir = root.join("Casks")
 
 start_marker = "<!-- FORMULA_TABLE_START -->"
 end_marker = "<!-- FORMULA_TABLE_END -->"
+cask_start_marker = "<!-- CASK_TABLE_START -->"
+cask_end_marker = "<!-- CASK_TABLE_END -->"
 
 readme = readme_path.read
 
@@ -17,7 +20,12 @@ unless readme.include?(start_marker) && readme.include?(end_marker)
   exit 1
 end
 
-rows = Dir[formula_dir.join("*.rb")].sort.map do |path|
+unless readme.include?(cask_start_marker) && readme.include?(cask_end_marker)
+  warn "Markers not found in README.md. Add #{cask_start_marker} and #{cask_end_marker}."
+  exit 1
+end
+
+formula_rows = Dir[formula_dir.join("*.rb")].sort.map do |path|
   name = File.basename(path, ".rb")
   content = File.read(path)
   desc =
@@ -28,21 +36,48 @@ rows = Dir[formula_dir.join("*.rb")].sort.map do |path|
   [name, desc]
 end
 
-table_lines = []
-table_lines << "| Formula | Description |"
-table_lines << "| ------- | ----------- |"
+formula_table_lines = []
+formula_table_lines << "| Formula | Description |"
+formula_table_lines << "| ------- | ----------- |"
 
-if rows.empty?
-  table_lines << "| _None_ | _No formulae available_ |"
+if formula_rows.empty?
+  formula_table_lines << "| _None_ | _No formulae available_ |"
 else
-  rows.each do |name, desc|
-    table_lines << "| `#{name}` | #{desc} |"
+  formula_rows.each do |name, desc|
+    formula_table_lines << "| `#{name}` | #{desc} |"
   end
 end
 
-replacement = [start_marker, table_lines.join("\n"), end_marker].join("\n")
+cask_rows = Dir[cask_dir.join("*.rb")].sort.map do |path|
+  name = File.basename(path, ".rb")
+  content = File.read(path)
+  desc =
+    content[/^\s*desc\s+"([^"]+)"/, 1] ||
+    content[/^\s*desc\s+'([^']+)'/, 1] ||
+    "No description"
 
-pattern = /#{Regexp.escape(start_marker)}.*?#{Regexp.escape(end_marker)}/m
-updated = readme.sub(pattern, replacement)
+  [name, desc]
+end
+
+cask_table_lines = []
+cask_table_lines << "| Cask | Description |"
+cask_table_lines << "| ---- | ----------- |"
+
+if cask_rows.empty?
+  cask_table_lines << "| _None_ | _No casks available_ |"
+else
+  cask_rows.each do |name, desc|
+    cask_table_lines << "| `#{name}` | #{desc} |"
+  end
+end
+
+formula_replacement = [start_marker, formula_table_lines.join("\n"), end_marker].join("\n")
+cask_replacement = [cask_start_marker, cask_table_lines.join("\n"), cask_end_marker].join("\n")
+
+formula_pattern = /#{Regexp.escape(start_marker)}.*?#{Regexp.escape(end_marker)}/m
+cask_pattern = /#{Regexp.escape(cask_start_marker)}.*?#{Regexp.escape(cask_end_marker)}/m
+
+updated = readme.sub(formula_pattern, formula_replacement)
+updated = updated.sub(cask_pattern, cask_replacement)
 
 readme_path.write(updated)
