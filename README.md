@@ -24,17 +24,17 @@ brew install bethropolis/tap/localgo
 ## Available formulae
 
 <!-- FORMULA_TABLE_START -->
-| Formula | Description |
-| ------- | ----------- |
-| `hello` | A greeting formula example |
+| Formula | Description | Install |
+| ------- | ----------- | ------- |
+| `hello` | A greeting formula example | `brew install bethropolis/tap/hello` |
 <!-- FORMULA_TABLE_END -->
 
 ## Available casks
 
 <!-- CASK_TABLE_START -->
-| Cask | Description |
-| ---- | ----------- |
-| `localgo` | LocalSend v2.1 protocol implementation — LAN file transfer CLI |
+| Cask | Description | Install |
+| ---- | ----------- | ------- |
+| `localgo` | LocalSend v2.1 protocol implementation — LAN file transfer CLI | `brew install --cask bethropolis/tap/localgo` |
 <!-- CASK_TABLE_END -->
 
 ## License

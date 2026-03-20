@@ -37,14 +37,14 @@ formula_rows = Dir[formula_dir.join("*.rb")].sort.map do |path|
 end
 
 formula_table_lines = []
-formula_table_lines << "| Formula | Description |"
-formula_table_lines << "| ------- | ----------- |"
+formula_table_lines << "| Formula | Description | Install |"
+formula_table_lines << "| ------- | ----------- | ------- |"
 
 if formula_rows.empty?
-  formula_table_lines << "| _None_ | _No formulae available_ |"
+  formula_table_lines << "| _None_ | _No formulae available_ | _N/A_ |"
 else
   formula_rows.each do |name, desc|
-    formula_table_lines << "| `#{name}` | #{desc} |"
+    formula_table_lines << "| `#{name}` | #{desc} | `brew install bethropolis/tap/#{name}` |"
   end
 end
 
@@ -60,14 +60,14 @@ cask_rows = Dir[cask_dir.join("*.rb")].sort.map do |path|
 end
 
 cask_table_lines = []
-cask_table_lines << "| Cask | Description |"
-cask_table_lines << "| ---- | ----------- |"
+cask_table_lines << "| Cask | Description | Install |"
+cask_table_lines << "| ---- | ----------- | ------- |"
 
 if cask_rows.empty?
-  cask_table_lines << "| _None_ | _No casks available_ |"
+  cask_table_lines << "| _None_ | _No casks available_ | _N/A_ |"
 else
   cask_rows.each do |name, desc|
-    cask_table_lines << "| `#{name}` | #{desc} |"
+    cask_table_lines << "| `#{name}` | #{desc} | `brew install --cask bethropolis/tap/#{name}` |"
   end
 end
 
