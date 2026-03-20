@@ -21,13 +21,8 @@ Install a formula:
 brew install bethropolis/tap/localgo
 ```
 
-## Available formulae
-
-<!-- FORMULA_TABLE_START -->
-| Formula | Description | Install |
-| ------- | ----------- | ------- |
-| `hello` | A greeting formula example | `brew install bethropolis/tap/hello` |
-<!-- FORMULA_TABLE_END -->
+<!-- FORMULA_SECTION_START -->
+<!-- FORMULA_SECTION_END -->
 
 ## Available casks
 

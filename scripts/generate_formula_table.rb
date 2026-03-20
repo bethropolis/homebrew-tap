@@ -8,8 +8,8 @@ readme_path = root.join("README.md")
 formula_dir = root.join("Formula")
 cask_dir = root.join("Casks")
 
-start_marker = "<!-- FORMULA_TABLE_START -->"
-end_marker = "<!-- FORMULA_TABLE_END -->"
+start_marker = "<!-- FORMULA_SECTION_START -->"
+end_marker = "<!-- FORMULA_SECTION_END -->"
 cask_start_marker = "<!-- CASK_TABLE_START -->"
 cask_end_marker = "<!-- CASK_TABLE_END -->"
 
@@ -25,8 +25,12 @@ unless readme.include?(cask_start_marker) && readme.include?(cask_end_marker)
   exit 1
 end
 
+ignored_formulae = ["hello"]
+
 formula_rows = Dir[formula_dir.join("*.rb")].sort.map do |path|
   name = File.basename(path, ".rb")
+  next if ignored_formulae.include?(name)
+
   content = File.read(path)
   desc =
     content[/^\s*desc\s+"([^"]+)"/, 1] ||
@@ -34,18 +38,17 @@ formula_rows = Dir[formula_dir.join("*.rb")].sort.map do |path|
     "No description"
 
   [name, desc]
-end
+end.compact
 
-formula_table_lines = []
-formula_table_lines << "| Formula | Description | Install |"
-formula_table_lines << "| ------- | ----------- | ------- |"
-
-if formula_rows.empty?
-  formula_table_lines << "| _None_ | _No formulae available_ | _N/A_ |"
-else
+formula_section = ""
+unless formula_rows.empty?
+  formula_table_lines = []
+  formula_table_lines << "| Formula | Description | Install |"
+  formula_table_lines << "| ------- | ----------- | ------- |"
   formula_rows.each do |name, desc|
     formula_table_lines << "| `#{name}` | #{desc} | `brew install bethropolis/tap/#{name}` |"
   end
+  formula_section = ["## Available formulae", "", formula_table_lines.join("\n")].join("\n")
 end
 
 cask_rows = Dir[cask_dir.join("*.rb")].sort.map do |path|
@@ -71,7 +74,12 @@ else
   end
 end
 
-formula_replacement = [start_marker, formula_table_lines.join("\n"), end_marker].join("\n")
+formula_replacement =
+  if formula_section.empty?
+    [start_marker, end_marker].join("\n")
+  else
+    [start_marker, formula_section, end_marker].join("\n")
+  end
 cask_replacement = [cask_start_marker, cask_table_lines.join("\n"), cask_end_marker].join("\n")
 
 formula_pattern = /#{Regexp.escape(start_marker)}.*?#{Regexp.escape(end_marker)}/m
