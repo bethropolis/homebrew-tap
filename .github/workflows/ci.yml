@@ -95,3 +95,7 @@ jobs:
           else
             echo "No Casks found."
           fi
+
+      - name: Cleanup Tap
+        if: always() && runner.os == 'macOS'
+        run: brew untap "${{ github.repository }}" 2>/dev/null || true
