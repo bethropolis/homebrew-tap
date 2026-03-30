@@ -44,6 +44,7 @@ jobs:
       - name: Run brew audit (Casks)
         if: runner.os == 'macOS'
         run: |
+          brew untap "${{ github.repository }}" 2>/dev/null || true
           brew tap "${{ github.repository }}" "${{ github.workspace }}"
           if ls Casks/*.rb 1> /dev/null 2>&1; then
             cask_names=$(for c in Casks/*.rb; do basename "$c" .rb; done)
