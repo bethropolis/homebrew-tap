@@ -35,7 +35,8 @@ jobs:
       - name: Run brew audit (Formulae)
         run: |
           if ls Formula/*.rb 1> /dev/null 2>&1; then
-            brew audit --strict --online Formula/*.rb
+            formula_names=$(for f in Formula/*.rb; do basename "$f" .rb; done)
+            brew audit --strict --online $formula_names
           else
             echo "No Formulae found."
           fi
@@ -44,7 +45,8 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           if ls Casks/*.rb 1> /dev/null 2>&1; then
-            brew audit --strict --online --cask Casks/*.rb
+            cask_names=$(for c in Casks/*.rb; do basename "$c" .rb; done)
+            brew audit --strict --online --cask $cask_names
           else
             echo "No Casks found."
           fi
