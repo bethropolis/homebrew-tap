@@ -87,8 +87,8 @@ jobs:
         run: |
           if ls Casks/*.rb 1> /dev/null 2>&1; then
             for c in Casks/*.rb; do
-              brew install --cask "$c"
               cask_name=$(basename "$c" .rb)
+              brew install --cask "${{ github.repository }}/$cask_name"
               echo "Running $cask_name --version"
               "$cask_name" --version
             done
