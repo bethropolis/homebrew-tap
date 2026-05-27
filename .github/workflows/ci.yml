@@ -44,11 +44,12 @@ jobs:
       - name: Run brew audit (Casks)
         if: runner.os == 'macOS'
         run: |
-          if ls Casks/*.rb 1> /dev/null 2>&1; then
-            cask_names=$(for c in Casks/*.rb; do basename "$c" .rb; done)
+          files="$(grep -l "on_macos" Casks/*.rb 2>/dev/null || true)"
+          if [ -n "$files" ]; then
+            cask_names=$(for c in $files; do basename "$c" .rb; done)
             brew audit --strict --online --cask --tap="${{ github.repository }}" $cask_names
           else
-            echo "No Casks found."
+            echo "No macOS-compatible casks found."
           fi
 
       - name: Run brew style (Formulae)
@@ -83,13 +84,14 @@ jobs:
       - name: Install and Dry Run Casks
         if: runner.os == 'macOS'
         run: |
-          if ls Casks/*.rb 1> /dev/null 2>&1; then
-            for c in Casks/*.rb; do
+          files="$(grep -l "on_macos" Casks/*.rb 2>/dev/null || true)"
+          if [ -n "$files" ]; then
+            for c in $files; do
               cask_name=$(basename "$c" .rb)
               brew install --cask "${{ github.repository }}/$cask_name"
               echo "Running $cask_name --version"
               "$cask_name" --version
             done
           else
-            echo "No Casks found."
+            echo "No macOS-compatible casks found."
           fi
