@@ -29,6 +29,7 @@ brew install bethropolis/tap/localgo
 <!-- CASK_TABLE_START -->
 | Cask | Description | Install |
 | ---- | ----------- | ------- |
+| `kcd` | Lightweight, headless implementation of the KDE Connect protocol (v8) written in Go | `brew install --cask bethropolis/tap/kcd` |
 | `localgo` | LocalSend v2.1 protocol implementation — LAN file transfer CLI | `brew install --cask bethropolis/tap/localgo` |
 <!-- CASK_TABLE_END -->
 
