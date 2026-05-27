@@ -4,12 +4,12 @@ cask "kcd" do
 
   on_linux do
     on_intel do
-      sha256 "ca823a1ebbee315f73499712774fff1add77992ef821f5405f452eefb2a130ee"
+      sha256 "65c6bf7406291d1025ac55706d0d9cf2ed5a69d99a1c80f9bfcdcea4c79f2493"
       url "https://github.com/bethropolis/kcd/releases/download/v#{version}/kcd_#{version}_linux_x86_64.tar.gz",
         verified: "github.com/bethropolis/kcd"
     end
     on_arm do
-      sha256 "a30a0f611a0391b4fc54f1a6d79d7e6f5c429cc0a9e7383c0bdbdc0c8bce0d04"
+      sha256 "b13938437408757c5167652c23d6803360fd55dabf8b63bea0e7a775ffc22069"
       url "https://github.com/bethropolis/kcd/releases/download/v#{version}/kcd_#{version}_linux_aarch64.tar.gz",
         verified: "github.com/bethropolis/kcd"
     end
