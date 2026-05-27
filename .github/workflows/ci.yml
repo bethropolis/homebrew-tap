@@ -46,8 +46,10 @@ jobs:
         run: |
           files="$(grep -l "on_macos" Casks/*.rb 2>/dev/null || true)"
           if [ -n "$files" ]; then
-            cask_names=$(for c in $files; do basename "$c" .rb; done)
-            brew audit --strict --online --cask --tap="${{ github.repository }}" $cask_names
+            for c in $files; do
+              cask_name=$(basename "$c" .rb)
+              brew audit --strict --online --cask "${{ github.repository }}/$cask_name"
+            done
           else
             echo "No macOS-compatible casks found."
           fi
