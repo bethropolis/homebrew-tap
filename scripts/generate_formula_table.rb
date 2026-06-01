@@ -59,18 +59,25 @@ cask_rows = Dir[cask_dir.join("*.rb")].sort.map do |path|
     content[/^\s*desc\s+'([^']+)'/, 1] ||
     "No description"
 
-  [name, desc]
+  has_macos = content.include?("on_macos")
+  has_linux = content.include?("on_linux")
+  platform = []
+  platform << "\u{1F34E}" if has_macos   # 🍎
+  platform << "\u{1F427}" if has_linux   # 🐧
+  platform_str = platform.empty? ? "\u{2753}" : platform.join(" ") # ❓
+
+  [name, desc, platform_str]
 end
 
 cask_table_lines = []
-cask_table_lines << "| Cask | Description | Install |"
-cask_table_lines << "| ---- | ----------- | ------- |"
+cask_table_lines << "| Cask | Description | Platform | Install |"
+cask_table_lines << "| ---- | ----------- | -------- | ------- |"
 
 if cask_rows.empty?
-  cask_table_lines << "| _None_ | _No casks available_ | _N/A_ |"
+  cask_table_lines << "| _None_ | _No casks available_ | _N/A_ | _N/A_ |"
 else
-  cask_rows.each do |name, desc|
-    cask_table_lines << "| `#{name}` | #{desc} | `brew install --cask bethropolis/tap/#{name}` |"
+  cask_rows.each do |name, desc, platform|
+    cask_table_lines << "| `#{name}` | #{desc} | #{platform} | `brew install --cask bethropolis/tap/#{name}` |"
   end
 end
 
