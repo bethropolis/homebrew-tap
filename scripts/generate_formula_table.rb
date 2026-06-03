@@ -59,6 +59,11 @@ cask_rows = Dir[cask_dir.join("*.rb")].sort.map do |path|
     content[/^\s*desc\s+'([^']+)'/, 1] ||
     "No description"
 
+  homepage =
+    content[/^\s*homepage\s+"([^"]+)"/, 1] ||
+    content[/^\s*homepage\s+'([^']+)'/, 1] ||
+    ""
+
   has_macos = content.include?("on_macos")
   has_linux = content.include?("on_linux")
   platform = []
@@ -66,7 +71,7 @@ cask_rows = Dir[cask_dir.join("*.rb")].sort.map do |path|
   platform << "\u{1F427}" if has_linux   # 🐧
   platform_str = platform.empty? ? "\u{2753}" : platform.join(" ") # ❓
 
-  [name, desc, platform_str]
+  [name, desc, homepage, platform_str]
 end
 
 cask_table_lines = []
@@ -76,8 +81,9 @@ cask_table_lines << "| ---- | ----------- | -------- | ------- |"
 if cask_rows.empty?
   cask_table_lines << "| _None_ | _No casks available_ | _N/A_ | _N/A_ |"
 else
-  cask_rows.each do |name, desc, platform|
-    cask_table_lines << "| `#{name}` | #{desc} | #{platform} | `brew install --cask bethropolis/tap/#{name}` |"
+  cask_rows.each do |name, desc, homepage, platform|
+    name_cell = homepage.empty? ? "`#{name}`" : "[`#{name}`](#{homepage})"
+    cask_table_lines << "| #{name_cell} | #{desc} | #{platform} | `brew install --cask bethropolis/tap/#{name}` |"
   end
 end
 
