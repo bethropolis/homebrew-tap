@@ -33,6 +33,20 @@ brew install bethropolis/tap/localgo
 | [`kcd`](https://github.com/bethropolis/kcd) | Lightweight, headless implementation of the KDE Connect protocol (v8) written in Go | 🐧 | `brew install --cask bethropolis/tap/kcd` |
 | [`localgo`](https://github.com/bethropolis/localgo) | LocalSend v2.1 protocol implementation — LAN file transfer CLI | 🍎 🐧 | `brew install --cask bethropolis/tap/localgo` |
 | [`podbox`](https://github.com/bethropolis/podbox) | Podman-native container environment manager | 🐧x64 | `brew install --cask bethropolis/tap/podbox` |
+
+<details>
+<summary>Platform key</summary>
+
+| Icon | Meaning |
+| ---- | ------- |
+| 🍎 | macOS |
+| 🐧 | Linux |
+| ❓ | Unknown platform |
+| No suffix | Both ARM and x86_64 |
+| `x64` suffix | x86_64 only |
+| `arm` suffix | ARM only |
+
+</details>
 <!-- CASK_TABLE_END -->
 
 ## License
