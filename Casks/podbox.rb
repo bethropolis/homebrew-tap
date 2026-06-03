@@ -4,7 +4,7 @@ cask "podbox" do
 
   on_linux do
     on_intel do
-      sha256 "b2a72e0f92ef3c75fc04cda0dfbd0abdc06a2a52d1a910a835d5deaf10f945ce"
+      sha256 "feba993df744f026fa5fe55a03086d1b42b695e5094336fba4d86678dc7fd5fc"
       url "https://github.com/bethropolis/podbox/releases/download/v#{version}/podbox-v#{version}-linux-x86_64.tar.gz"
     end
   end
@@ -21,4 +21,8 @@ cask "podbox" do
 
   # No zap stanza required
 
+  caveats <<~EOS
+    Run 'podbox pull' to fetch prebuilt images (the only supported image type).
+    Run 'podbox doctor' to verify your setup.
+  EOS
 end
