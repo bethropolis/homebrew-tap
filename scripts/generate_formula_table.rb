@@ -3,6 +3,42 @@
 
 require "pathname"
 
+def archs_in_platform(content, platform)
+  lines = content.lines
+  marker = "  #{platform} do"
+  start = lines.index { |l| l.include?(marker) }
+  return [] unless start
+
+  depth = 0
+  end_line = nil
+  lines[start..].each_with_index do |line, i|
+    depth += 1 if line.match?(/\bdo\s*$/)
+    depth -= 1 if line.strip == "end"
+    if depth == 0
+      end_line = start + i
+      break
+    end
+  end
+
+  block = lines[start..end_line].join
+  result = []
+  result << :intel if block.include?("on_intel")
+  result << :arm if block.include?("on_arm")
+  result
+end
+
+def platform_tag(archs, emoji)
+  if archs.size == 2
+    emoji
+  elsif archs == [:intel]
+    "#{emoji}x64"
+  elsif archs == [:arm]
+    "#{emoji}arm"
+  else
+    emoji
+  end
+end
+
 root = Pathname.new(__dir__).parent
 readme_path = root.join("README.md")
 formula_dir = root.join("Formula")
@@ -67,9 +103,15 @@ cask_rows = Dir[cask_dir.join("*.rb")].sort.map do |path|
   has_macos = content.include?("on_macos")
   has_linux = content.include?("on_linux")
   platform = []
-  platform << "\u{1F34E}" if has_macos   # 🍎
-  platform << "\u{1F427}" if has_linux   # 🐧
-  platform_str = platform.empty? ? "\u{2753}" : platform.join(" ") # ❓
+  if has_macos
+    macos_archs = archs_in_platform(content, "on_macos")
+    platform << platform_tag(macos_archs, "\u{1F34E}")
+  end
+  if has_linux
+    linux_archs = archs_in_platform(content, "on_linux")
+    platform << platform_tag(linux_archs, "\u{1F427}")
+  end
+  platform_str = platform.empty? ? "\u{2753}" : platform.join(" ")
 
   [name, desc, homepage, platform_str]
 end
