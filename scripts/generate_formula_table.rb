@@ -135,7 +135,19 @@ formula_replacement =
   else
     [start_marker, formula_section, end_marker].join("\n")
   end
-cask_replacement = [cask_start_marker, cask_table_lines.join("\n"), cask_end_marker].join("\n")
+cask_replacement = [cask_start_marker, cask_table_lines.join("\n"), "", "<details>",
+  "<summary>Platform key</summary>",
+  "",
+  "| Icon | Meaning |",
+  "| ---- | ------- |",
+  "| \u{1F34E} | macOS |",
+  "| \u{1F427} | Linux |",
+  "| \u{2753} | Unknown platform |",
+  "| No suffix | Both ARM and x86\_64 |",
+  "| `x64` suffix | x86\_64 only |",
+  "| `arm` suffix | ARM only |",
+  "",
+  "</details>", cask_end_marker].join("\n")
 
 formula_pattern = /#{Regexp.escape(start_marker)}.*?#{Regexp.escape(end_marker)}/m
 cask_pattern = /#{Regexp.escape(cask_start_marker)}.*?#{Regexp.escape(cask_end_marker)}/m
