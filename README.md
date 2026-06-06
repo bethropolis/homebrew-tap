@@ -32,7 +32,7 @@ brew install bethropolis/tap/localgo
 | [`bgrun`](https://github.com/bethropolis/bgrun) | Background process manager for development workflows | 🐧 | `brew install --cask bethropolis/tap/bgrun` |
 | [`kcd`](https://github.com/bethropolis/kcd) | Lightweight, headless implementation of the KDE Connect protocol (v8) written in Go | 🐧 | `brew install --cask bethropolis/tap/kcd` |
 | [`localgo`](https://github.com/bethropolis/localgo) | LocalSend v2.1 protocol implementation — LAN file transfer CLI | 🍎 🐧 | `brew install --cask bethropolis/tap/localgo` |
-| [`podbox`](https://github.com/bethropolis/podbox) | Podman-native container environment manager | 🐧x64 | `brew install --cask bethropolis/tap/podbox` |
+| [`podbox`](https://github.com/bethropolis/podbox) | Podman-native container environment manager | 🐧 | `brew install --cask bethropolis/tap/podbox` |
 
 <details>
 <summary>Platform key</summary>
