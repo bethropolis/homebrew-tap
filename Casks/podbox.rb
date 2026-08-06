@@ -4,11 +4,11 @@ cask "podbox" do
 
   on_linux do
     on_intel do
-      sha256 "76fc8aba0d8da7655657269db205ced38cb5e0e2772ac4fbc58dfe98f098b6e6"
+      sha256 "afae10ab4591ea775713d23bcc964b95f0c15ef3383a6338e363149aaec1ff33"
       url "https://github.com/bethropolis/podbox/releases/download/v#{version}/podbox-v#{version}-linux-x86_64.tar.gz"
     end
     on_arm do
-      sha256 "4007acadee55be560aa6fe56cd24a624bb659c4c05b111ed4a52d0a7eaddbe17"
+      sha256 "deab30cb40092a2abeffa79496058f5931acda17ce49880acbb009b320f7b9a0"
       url "https://github.com/bethropolis/podbox/releases/download/v#{version}/podbox-v#{version}-linux-arm64.tar.gz"
     end
   end
