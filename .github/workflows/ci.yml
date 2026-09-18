@@ -20,7 +20,7 @@ jobs:
 
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@main
 
       - name: Cache Homebrew Bundler RubyGems
         uses: actions/cache@v4
@@ -91,8 +91,14 @@ jobs:
             for c in $files; do
               cask_name=$(basename "$c" .rb)
               brew install --cask "${{ github.repository }}/$cask_name"
-              echo "Running $cask_name --version"
-              "$cask_name" --version
+              binary_name=$(sed -n 's/^[[:space:]]*binary[[:space:]]*"\([^"]*\)".*/\1/p' "$c" | head -n1)
+              if [ -n "$binary_name" ]; then
+                binary_name=$(basename "$binary_name")
+                echo "Running $binary_name --version"
+                "$binary_name" --version
+              else
+                echo "No binary stanza found for $cask_name; skipping version check."
+              fi
             done
           else
             echo "No macOS-compatible casks found."
