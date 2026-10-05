@@ -34,6 +34,7 @@ brew install bethropolis/tap/localgo
 | [`localgo`](https://github.com/bethropolis/localgo) | LocalSend v2 protocol implementation. LAN file transfer CLI | 🍎 🐧 | `brew install --cask bethropolis/tap/localgo` |
 | [`podbox`](https://github.com/bethropolis/podbox) | Podman-native container environment manager | 🐧 | `brew install --cask bethropolis/tap/podbox` |
 | [`sift-cli`](https://github.com/bethropolis/sift) | LLM-friendly codebase context picker | 🍎 🐧 | `brew install --cask bethropolis/tap/sift-cli` |
+| [`sift`](https://github.com/bethropolis/sift) | LLM-friendly codebase context picker | 🍎 🐧 | `brew install --cask bethropolis/tap/sift` |
 
 <details>
 <summary>Platform key</summary>
